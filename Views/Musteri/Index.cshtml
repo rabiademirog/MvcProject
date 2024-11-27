@@ -5,6 +5,15 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+            {
+               <p>
+                   <b>Aranacak Müşteri Adı:</b> @Html.TextBox("p")
+                   <input type="submit" value="Ara" />
+               </p>
+            }
+
+
 <table class="table table-bordered">
     <tr>
         <th>MÜŞTERİ ID</th>
@@ -12,6 +21,7 @@
         <th>MÜŞTERİ SOYAD</th>
         <th>SİL</th>
         <th>GÜNCELLE</th>
+        <th>ALERT</th>
     </tr>
     <tbody>
         @foreach (var mstr in Model)
@@ -22,6 +32,7 @@
                 <td>@mstr.MSTERISOYAD</td>
                 <td>  <a href="/Musteri/sil/@mstr.MUSTERIID" class="btn btn-danger">SİL</a>  </td>
                 <td>  <a href="/Musteri/MusteriGetir/@mstr.MUSTERIID" class="btn btn-success">GÜNCELLE</a>  </td>
+                <td>@Html.ActionLink("SİL BUTONU", "sil", new { id=mstr.MUSTERIID }, new { @class = "btn btn-warning", onclick = "return confirm('Silmek İstiyor Musunuz?')" })</td>
             </tr>
         }
     </tbody>
